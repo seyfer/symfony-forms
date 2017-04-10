@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Hello</h1>
+
+    <hr>
+
+    {{ form_start(myForm) }}
+    {{ form_row(myForm.personName) }}
+    {{ form_row(myForm.submit, { 'attr': {'class': 'btn btn-success'}, 'label':'Send it!' }) }}
+    {{ form_end(myForm) }}
+
+{% endblock %}
