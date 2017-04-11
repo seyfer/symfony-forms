@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Edit product</h1>
+
+    <hr>
+
+    {{ form_start(myForm) }}
+
+    <div class="form-group {% if not myForm.title.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.title) }}
+    </div>
+
+    <div class="form-group {% if not myForm.availableFrom.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.availableFrom) }}
+    </div>
+
+    <div class="form-group {% if not myForm.description.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.description) }}
+    </div>
+
+    <div class="form-group {% if not myForm.email.vars.valid %}has-error{% endif %}">
+        {#{{ form_label(myForm.email) }}#}
+        {#<div class="col-sm-10">#}
+        {{ form_row(myForm.email, { 'attr': { 'class': 'input-lg' } }) }}
+        {{ form_errors(myForm.email) }}
+        {#</div>#}
+    </div>
+
+    {{ form_end(myForm) }}
+
+{% endblock %}

@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Item;
 use AppBundle\Entity\Product;
+use AppBundle\Form\Type\ItemType;
 use AppBundle\Form\Type\ProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -69,13 +71,66 @@ class DefaultController extends Controller
             $em->persist($product);
             $em->flush();
 
-            $this->addFlash('success', 'Product ' . $product->getId());
+            $this->addFlash('success', 'Product added ' . $product->getId());
         }
 
         return $this->render(':default:add-form.html.twig', [
             'myForm' => $form->createView()
         ]);
 
+    }
+
+    /**
+     * @Route("/edit-product/{product}", name="edit-product", defaults={"product":null})
+     */
+    public function formEditAction(Request $request, Product $product)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //with productId
+//        $product = $em->getRepository('AppBundle:Product')->find($productId);
+
+        $form = $this->createForm(ProductType::class, $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->flush();
+
+            $this->addFlash('success', 'Product edited ' . $product->getId());
+
+            return $this->redirectToRoute('edit-product', ['product' => $product->getId()]);
+        }
+
+        return $this->render(':default:edit-form.html.twig', [
+            'myForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/edit-item/{item}", name="edit-item", defaults={"item":null})
+     */
+    public function formEditItemAction(Request $request, Item $item)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(ItemType::class, $item);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->flush();
+
+            $this->addFlash('success', 'Item edited ' . $item->getId());
+
+            return $this->redirectToRoute('edit-item', ['item' => $item->getId()]);
+        }
+
+        return $this->render(':default:float.html.twig', [
+            'myForm' => $form->createView()
+        ]);
     }
 
     /**

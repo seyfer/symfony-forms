@@ -39,6 +39,8 @@
                     <a href="/">Home</a></li>
                 <li {% if app.request.attributes.get('_route') == 'add-product' %}class="active"{% endif %}>
                     <a href="{{ url('add-product') }}">Add Product</a></li>
+                <li {% if app.request.attributes.get('_route') == 'edit-product' %}class="active"{% endif %}>
+                    <a href="{{ path('edit-product', {'product':1}) }}">Edit Product</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

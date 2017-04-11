@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -27,6 +28,7 @@ class Product
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Length(min="10", minMessage="this value was too short")
      */
     protected $title;
 
@@ -40,6 +42,27 @@ class Product
      */
     protected $description;
 
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Email()
+     */
+    protected $email;
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 
     /**
      * @return mixed

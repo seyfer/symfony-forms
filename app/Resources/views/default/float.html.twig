@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Edit product</h1>
+
+    <hr>
+
+    {{ form_start(myForm) }}
+
+    <div class="form-group {% if not myForm.integerNum.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.integerNum) }}
+    </div>
+
+    <div class="form-group {% if not myForm.numberNum.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.numberNum) }}
+    </div>
+
+    <div class="form-group {% if not myForm.floatNum.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.floatNum) }}
+    </div>
+
+    {{ form_end(myForm) }}
+
+{% endblock %}
