@@ -76,11 +76,36 @@ class Item
     protected $choice;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", name="accurate_at")
+     * @Assert\DateTime()
+     * @Assert\LessThanOrEqual("now")
+     */
+    protected $accurateAt;
+
+    /**
      * Item constructor.
      */
     public function __construct()
     {
-        $this->dateTimeField = new \DateTime('1970-01-01');
+//        $this->dateTimeField = $this->dateTimeField ?? new \DateTime('1970-01-01');
+//        $this->accurateAt = $this->accurateAt ?? new \DateTime('1970-01-01');
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getAccurateAt()
+    {
+        return $this->accurateAt;
+    }
+
+    /**
+     * @param \DateTime $accurateAt
+     */
+    public function setAccurateAt($accurateAt)
+    {
+        $this->accurateAt = $accurateAt;
     }
 
     /**

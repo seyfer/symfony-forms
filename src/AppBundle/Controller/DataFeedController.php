@@ -42,11 +42,11 @@ class DataFeedController extends Controller
              */
             $dataFeed = $form->getData();
 
-            $timetable = new Timetable();
-            $timetable->setManualEntry(120);
-            $timetable->setPresetChoice(45);
-
-            $dataFeed->setTimetable($timetable);
+//            $timetable = new Timetable();
+//            $timetable->setManualEntry(120);
+//            $timetable->setPresetChoice(45);
+//
+//            $dataFeed->setTimetable($timetable);
 
             $em->persist($dataFeed->getTimetable());
             $em->persist($dataFeed);

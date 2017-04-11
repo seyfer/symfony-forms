@@ -11,6 +11,8 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Timetable
@@ -20,6 +22,20 @@ use Doctrine\ORM\Mapping as ORM;
 class Timetable
 {
     /**
+     * @Assert\Callback()
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if ($this->getPresetChoice() === null && $this->getManualEntry() === null) {
+            $context->buildViolation('Either a preset, or a manual entry must be supplied')->addViolation();
+        }
+
+        if ($this->getPresetChoice() !== null && $this->getManualEntry() !== null) {
+            $context->buildViolation('Cannot use both a preset and a manual entry')->addViolation();
+        }
+    }
+
+    /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -27,12 +43,12 @@ class Timetable
     protected $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $presetChoice;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $manualEntry;
 

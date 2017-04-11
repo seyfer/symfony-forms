@@ -31,6 +31,7 @@ class DataFeedType extends AbstractType
                 ],
                 'expanded' => true,
             ])
+            ->add('timetable', TimetableType::class)
             ->add('save', SubmitType::class);
     }
 

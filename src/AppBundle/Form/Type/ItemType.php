@@ -11,6 +11,7 @@ namespace AppBundle\Form\Type;
 
 
 use AppBundle\Entity\Item;
+use AppBundle\Form\DataTransformer\TimestampToDateTimeTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -51,20 +52,23 @@ class ItemType extends AbstractType
                     'widget'         => 'single_text'
                 ])
                 ->add('choice', ChoiceType::class, [
-                    'choices' => [
+                    'choices'           => [
                         'Yes' => true,
                         'No'  => false
                     ],
-                    'label'   => 'Choose wisely',
+                    'label'             => 'Choose wisely',
                     'preferred_choices' => [
 
                     ],
                     //radio
-//                    'expanded' => true,
+                    //                    'expanded' => true,
                     //checkbox
-//                    'multiple' => true,
+                    //                    'multiple' => true,
                 ])
+                ->add('accurateAt', NumberType::class)
                 ->add('submit', SubmitType::class);
+
+        $builder->get('accurateAt')->addModelTransformer(new TimestampToDateTimeTransformer());
 
         return $builder;
     }
