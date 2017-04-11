@@ -21,7 +21,7 @@ class FloatType extends AbstractType
         $resolver->setDefaults([
                                    'scale' => 3,
                                    'attr'  => [
-                                       'step' => 0.01,
+                                       'step' => 0.001,
                                        //                                       'min'  => 0,
                                        //                                       'max'  => 1000
                                    ]

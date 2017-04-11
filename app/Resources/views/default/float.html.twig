@@ -2,11 +2,11 @@
 
 {% block body %}
 
-    <h1>Edit product</h1>
+    <h1>Edit item</h1>
 
     <hr>
 
-    {{ form_start(myForm) }}
+    {{ form_start(myForm, {'attr': {'id': 'item'}}) }}
 
     <div class="form-group {% if not myForm.integerNum.vars.valid %}has-error{% endif %}">
         {{ form_row(myForm.integerNum) }}
@@ -20,6 +20,26 @@
         {{ form_row(myForm.floatNum) }}
     </div>
 
+    <div class="form-group {% if not myForm.moneyNum.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.moneyNum) }}
+    </div>
+
+    <div class="form-group {% if not myForm.rangeNum.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.rangeNum) }}
+    </div>
+
+    <div class="form-group {% if not myForm.dateField.vars.valid %}has-error{% endif %}">
+        {{ form_row(myForm.dateField) }}
+    </div>
+
     {{ form_end(myForm) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('js/datetime.js') }}"></script>
 
 {% endblock %}
